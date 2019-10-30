@@ -1,7 +1,8 @@
-package app.melum
+package app.melum.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import app.melum.R
 
 class MainActivity : AppCompatActivity() {
 
