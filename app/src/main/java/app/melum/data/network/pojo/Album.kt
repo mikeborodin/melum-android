@@ -1,6 +1,8 @@
-package app.melum.data.model
+package app.melum.data.network.pojo
 
 import com.google.gson.annotations.SerializedName
+
+class AlbumResponse(val album: Album)
 
 data class Album(
     val artist: String,

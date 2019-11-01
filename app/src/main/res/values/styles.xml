@@ -7,8 +7,32 @@
         <item name="colorPrimaryDark">@color/background</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/textDescription</item>
-
+        <item name="android:textColor">@color/onBackground</item>
     </style>
+
+    <style name="Title" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:padding">@dimen/size_small</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/onBackground</item>
+    </style>
+
+    <style name="Description" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="android:padding">@dimen/size_small</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/onBackgroundSecondary</item>
+    </style>
+
+    <style name="PrimaryButton" parent="@style/AppTheme">
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:padding">@dimen/size_small</item>
+        <item name="android:textAllCaps">@dimen/size_small</item>
+        <item name="android:background">@drawable/background_button_primary</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/onPrimary</item>
+    </style>
+
 
 </resources>

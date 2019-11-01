@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#D64A48</color>
     <color name="colorAccent">#FF9800</color>
     <color name="background">#323232</color>
-    <color name="textTitle">#fff</color>
-    <color name="textDescription">#D8D8D8</color>
+    <color name="offline_panel_background">#ff790e</color>
+
+    <color name="onPrimary">#ffffff</color>
+    <color name="onBackground">#FFFFFF</color>
+    <color name="onBackgroundSecondary">#B8B8B8</color>
+    <color name="primaryButtonText">#000000</color>
+    <color name="fabColor">#0a0a0a</color>
 </resources>

@@ -1,13 +1,17 @@
 package app.melum.ui
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import app.melum.R
+import app.melum.base.BaseActivity
+import kotlin.reflect.KClass
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<MainViewModel>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override val viewModelClass: KClass<MainViewModel> = MainViewModel::class
+
+    override val layoutId: Int = R.layout.activity_main
+
+    override fun observeLiveData() {
+
     }
+
 }
