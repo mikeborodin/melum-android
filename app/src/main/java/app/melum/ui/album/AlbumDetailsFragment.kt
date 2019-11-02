@@ -3,7 +3,7 @@ package app.melum.ui.album
 import android.os.Bundle
 import android.view.View
 import app.melum.R
-import app.melum.base.BaseFragment
+import app.melum.common.BaseFragment
 import kotlinx.android.synthetic.main.album_details_fragment.*
 import kotlin.reflect.KClass
 

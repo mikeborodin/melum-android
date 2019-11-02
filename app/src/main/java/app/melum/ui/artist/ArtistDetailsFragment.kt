@@ -3,8 +3,7 @@ package app.melum.ui.artist
 import android.os.Bundle
 import android.view.View
 import app.melum.R
-import app.melum.base.BaseFragment
-import app.melum.ui.explore.ExploreFragmentDirections
+import app.melum.common.BaseFragment
 import kotlinx.android.synthetic.main.explore_fragment.*
 import kotlin.reflect.KClass
 

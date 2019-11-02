@@ -1,6 +1,6 @@
 package app.melum.ui.home
 
-import app.melum.base.BaseViewModel
+import app.melum.common.BaseViewModel
 
 class HomeViewModel : BaseViewModel() {
 

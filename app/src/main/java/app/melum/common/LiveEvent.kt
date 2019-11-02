@@ -1,4 +1,4 @@
-package app.melum.base
+package app.melum.common
 
 class Event<out T>(private val content: T) {
 

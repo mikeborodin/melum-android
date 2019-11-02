@@ -1,4 +1,4 @@
-package app.melum.base
+package app.melum.common
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

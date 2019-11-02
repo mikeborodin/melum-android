@@ -3,7 +3,7 @@ package app.melum.ui.home
 import android.os.Bundle
 import android.view.View
 import app.melum.R
-import app.melum.base.BaseFragment
+import app.melum.common.BaseFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlin.reflect.KClass
 

@@ -1,4 +1,4 @@
-package app.melum.base
+package app.melum.common
 
 import android.os.Bundle
 import android.view.LayoutInflater

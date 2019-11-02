@@ -2,9 +2,9 @@ package app.melum.data.network.pojo
 
 import com.google.gson.annotations.SerializedName
 
-class ArtistResponse(val artist: Artist)
+class ArtistResponse(val artist: ArtistNetwork)
 
-data class Artist(
+data class ArtistNetwork(
     val bio: Bio,
     val image: List<Image>,
     val mbid: String,

@@ -1,8 +1,9 @@
 package app.melum.data.network.pojo
 
+import app.melum.entities.Artist
 import com.google.gson.annotations.SerializedName
 
-data class SearchResult(
+data class SearchArtistResponse(
     val results: Results
 )
 
@@ -36,7 +37,11 @@ data class SearchedArtist(
     val name: String,
     val streamable: String,
     val url: String
-)
+) {
+    fun toArtistPreview(): Artist {
+        return Artist(name, image.associate { it.size to it.text }.getOrElse("medium", { "" }))
+    }
+}
 
 
 data class OpensearchQuery(

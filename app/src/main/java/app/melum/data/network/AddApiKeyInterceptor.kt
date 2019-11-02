@@ -16,6 +16,7 @@ class AddApiKeyInterceptor : Interceptor {
         return chain.proceed(
             chain.request().newBuilder()
                 .url(url)
+                .addHeader("Content-type", "application")
                 .build()
         )
     }

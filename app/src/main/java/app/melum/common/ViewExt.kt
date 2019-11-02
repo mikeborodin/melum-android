@@ -1,4 +1,4 @@
-package app.melum.base
+package app.melum.common
 
 import android.app.Activity
 import android.app.Dialog

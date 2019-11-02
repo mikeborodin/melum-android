@@ -1,7 +1,7 @@
 package app.melum.ui
 
 import app.melum.R
-import app.melum.base.BaseActivity
+import app.melum.common.BaseActivity
 import kotlin.reflect.KClass
 
 class MainActivity : BaseActivity<MainViewModel>() {

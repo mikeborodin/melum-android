@@ -1,4 +1,4 @@
-package app.melum.base
+package app.melum.common
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
