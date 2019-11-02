@@ -12,6 +12,6 @@ val viewModuleModule = module {
     viewModel { MainViewModel() }
     viewModel { HomeViewModel() }
     viewModel { ExploreViewModel(get()) }
-    viewModel { ArtistDetailsViewModel() }
-    viewModel { AlbumDetailsViewModel() }
+    viewModel { ArtistDetailsViewModel(get(), get()) }
+    viewModel { AlbumDetailsViewModel(get()) }
 }

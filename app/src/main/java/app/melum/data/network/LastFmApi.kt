@@ -1,8 +1,8 @@
 package app.melum.data.network
 
-import app.melum.data.network.pojo.AlbumResponse
-import app.melum.data.network.pojo.ArtistResponse
+import app.melum.data.network.pojo.AlbumDetailsResponse
 import app.melum.data.network.pojo.SearchArtistResponse
+import app.melum.data.network.pojo.TopAbumsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,12 +12,9 @@ interface LastFmApi {
     suspend fun searchArtist(@Query("artist") artist: String): SearchArtistResponse
 
     @GET("?method=artist.gettopalbums")
-    suspend fun getArtistTopAlbums(@Query("artist") artist: String): ArtistResponse
+    suspend fun getArtistTopAlbums(@Query("artist") artist: String): TopAbumsResponse
 
     @GET("?method=album.getinfo")
-    suspend fun getAlbumInfo(
-        @Query("artist") artist: String,
-        @Query("album") album: String
-    ): AlbumResponse
+    suspend fun getAlbumInfo(@Query("mbid") id: String): AlbumDetailsResponse
 
 }

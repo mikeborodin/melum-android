@@ -1,72 +1,56 @@
 package app.melum.data.network.pojo
 
+import app.melum.entities.Artist
 import com.google.gson.annotations.SerializedName
 
-class ArtistResponse(val artist: ArtistNetwork)
+data class SearchArtistResponse(
+    val results: Results
+)
+
+data class Results(
+    @SerializedName("@attr")
+    val attr: For,
+    val artistmatches: ArtistMatches,
+
+    @SerializedName("opensearch:Query")
+    val query: OpensearchQuery,
+    @SerializedName("opensearch:itemsPerPage")
+    val itemsPerPage: String,
+    @SerializedName("opensearch:startIndex")
+    val startIndex: String,
+    @SerializedName("opensearch:totalResults")
+    val totalResults: String
+)
+
+data class For(
+    val `for`: String
+)
+
+data class ArtistMatches(
+    val artist: List<ArtistNetwork>
+)
 
 data class ArtistNetwork(
-    val bio: Bio,
     val image: List<Image>,
+    val listeners: String,
     val mbid: String,
     val name: String,
-    val ontour: String,
-    val similar: Similar,
-    val stats: Stats,
     val streamable: String,
-    val tags: Tags,
-    val url: String
-)
+    val url: String?
+) {
+    fun toArtist(): Artist {
+        return Artist(mbid, name,
+            image.associate { it.size to it.text }.getOrElse("medium", { "" }),
+            url ?: ""
+        )
+    }
+}
 
-data class Bio(
-    val content: String,
-    val links: Links,
-    val published: String,
-    val summary: String
-)
 
-data class Links(
-    val link: Link
-)
-
-data class Link(
+data class OpensearchQuery(
     @SerializedName("#text")
     val text: String,
-    val href: String,
-    val rel: String
-)
-
-data class Image(
-    @SerializedName("#text")
-    val text: String,
-    val size: String
-)
-
-data class Similar(
-    val artist: List<ArtistX>
-)
-
-data class ArtistX(
-    val image: List<ImageX>,
-    val name: String,
-    val url: String
-)
-
-data class ImageX(
-    @SerializedName("#text")
-    val text: String,
-    val size: String
-)
-
-data class Stats(
-    val listeners: String,
-    val playcount: String
-)
-
-data class Tags(
-    val tag: List<Tag>
-)
-
-data class Tag(
-    val name: String,
-    val url: String
+    val role: String,
+    val searchTerms: String,
+    val startPage: String
 )

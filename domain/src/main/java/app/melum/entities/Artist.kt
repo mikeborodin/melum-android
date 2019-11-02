@@ -2,11 +2,13 @@ package app.melum.entities
 
 import java.io.Serializable
 
-data class Album(
+data class Artist(
     val id: String,
-    val title: String,
-    val cover: String
+    val name: String,
+    val image: String,
+    val link: String
 ) : Serializable {
+
 }
 
 

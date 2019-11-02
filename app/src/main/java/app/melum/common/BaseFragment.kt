@@ -81,7 +81,11 @@ abstract class BaseFragment<T : BaseViewModel> : Fragment() {
 
     private fun showMessage(message: String) {
         binding?.root?.let {
-            Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(it, message, Snackbar.LENGTH_SHORT)
+                .apply {
+                    this.view.setBackgroundResource(R.color.darker)
+                }
+                .show()
         }
     }
 

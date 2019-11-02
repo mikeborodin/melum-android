@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,8 +14,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_medium"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="back"
+            android:padding="@dimen/size_medium"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@color/onBackground"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_medium"
@@ -25,17 +41,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintBottom_toBottomOf="@id/btnSave"
+            android:layout_width="match_parent"
+            android:id="@+id/rvSongs"
+            tools:listitem="@layout/item_song"
+            android:layout_height="0dp" />
+
+
+        <include layout="@layout/loader" />
+
         <Button
-            style="@style/PrimaryButton"
             android:id="@+id/btnSave"
+            style="@style/PrimaryButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/font_medium"
             android:text="Save"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

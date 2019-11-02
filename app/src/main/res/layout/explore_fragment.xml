@@ -8,13 +8,16 @@
         <variable
             name="viewModel"
             type="app.melum.ui.explore.ExploreViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
         <ImageButton
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_medium"
@@ -23,12 +26,12 @@
             android:padding="@dimen/size_medium"
             android:src="@drawable/ic_arrow_back"
             android:tint="@color/onBackground"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_medium"
@@ -37,6 +40,47 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilSearch"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_medium"
+            android:layout_marginTop="@dimen/size_medium"
+            android:layout_marginEnd="@dimen/size_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Type here..."
+                android:imeActionLabel="Done"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLength="100"
+                android:singleLine="true"
+                android:text="@={viewModel.query}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/PrimaryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/font_medium"
+            android:layout_marginEnd="@dimen/size_large"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="Search"
+            app:layout_constraintBottom_toBottomOf="@id/tilSearch"
+            app:layout_constraintEnd_toEndOf="@id/tilSearch"
+            app:layout_constraintTop_toTopOf="@id/tilSearch"
+            app:showIf="@{viewModel.query != ``}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvArtists"
@@ -47,16 +91,38 @@
             app:layout_constraintTop_toBottomOf="@+id/btnNext"
             tools:listitem="@layout/item_artist_result" />
 
-        <Button
-            android:id="@+id/btnNext"
-            style="@style/PrimaryButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/font_medium"
-            android:text="Search"
+        <include layout="@layout/loader" />
+
+
+        <ImageView
+            android:id="@+id/ivEmptyState"
+            android:layout_width="@dimen/size_large"
+            android:layout_height="@dimen/size_large"
+            android:src="@drawable/ic_library_music"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvEmptyState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_medium"
+            android:text="Results are empty"
+            android:textSize="@dimen/font_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivEmptyState" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/gEmptyState"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="tvEmptyState,ivEmptyState"
+            app:showIf="@{viewModel.isEmptyState &amp;&amp; !viewModel.loading}" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -11,5 +11,6 @@
     <dimen name="font_small">10sp</dimen>
     <dimen name="font_medium">16sp</dimen>
     <dimen name="font_large">24sp</dimen>
+    <dimen name="artist_image_height">300dp</dimen>
 
 </resources>

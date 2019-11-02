@@ -10,8 +10,8 @@ import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel : ViewModel(), CoroutineScope, KoinComponent {
 
-    private val _loading: MediatorLiveData<Boolean> = MediatorLiveData()
-    private val _errors: MutableLiveData<Event<Throwable>> = MutableLiveData()
+    protected val _loading: MediatorLiveData<Boolean> = MediatorLiveData()
+    protected val _errors: MutableLiveData<Event<Throwable>> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
     val errors: LiveData<Event<Throwable>> = _errors
 
@@ -24,14 +24,14 @@ open class BaseViewModel : ViewModel(), CoroutineScope, KoinComponent {
     }
 
     override val coroutineContext: CoroutineContext =
-            Dispatchers.Main + job + coroutineExceptionHandler
+        Dispatchers.Main + job + coroutineExceptionHandler
 
     private val ioCoroutineContext: CoroutineContext = Dispatchers.IO + job
 
     protected fun <T> launchHandled(
-            task: suspend CoroutineScope.() -> T,
-            onSuccess: (T) -> Unit,
-            onError: ((Exception) -> Unit)? = null
+        task: suspend CoroutineScope.() -> T,
+        onSuccess: (T) -> Unit,
+        onError: ((Exception) -> Unit)? = null
     ) {
         launch(ioCoroutineContext) {
             _loading.postValue(true)
@@ -39,6 +39,7 @@ open class BaseViewModel : ViewModel(), CoroutineScope, KoinComponent {
                 onSuccess(task())
             } catch (e: Exception) {
                 onError?.invoke(e)
+                e.printStackTrace()
                 _errors.postValue(Event(e))
             } finally {
                 _loading.postValue(false)

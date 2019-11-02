@@ -33,6 +33,9 @@
         android:name="app.melum.ui.artist.ArtistDetailsFragment"
         android:label="ArtistDetailsFragment"
         tools:layout="@layout/artist_details_fragment">
+        <argument
+            android:name="artist"
+            app:argType="app.melum.entities.Artist" />
         <action
             android:id="@+id/toAlbumFragment"
             app:destination="@id/albumFragment" />
@@ -43,11 +46,18 @@
         android:name="app.melum.ui.album.AlbumDetailsFragment"
         android:label="AlbumDetailsFragment"
         tools:layout="@layout/album_details_fragment">
+        <argument
+            android:name="album"
+            app:argType="app.melum.entities.Album" />
+
+        <argument
+            android:name="artist"
+            app:argType="app.melum.entities.Artist" />
         <action
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/main_graph"
             android:id="@+id/toHomeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/main_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

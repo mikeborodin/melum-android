@@ -9,6 +9,5 @@
     <color name="onPrimary">#ffffff</color>
     <color name="onBackground">#FFFFFF</color>
     <color name="onBackgroundSecondary">#B8B8B8</color>
-    <color name="primaryButtonText">#000000</color>
-    <color name="fabColor">#0a0a0a</color>
+    <color name="darker">#222</color>
 </resources>

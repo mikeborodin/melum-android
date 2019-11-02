@@ -1,10 +1,13 @@
 package app.melum.data.network.pojo
 
+import app.melum.entities.AlbumDetails
+import app.melum.entities.Song
 import com.google.gson.annotations.SerializedName
 
-class AlbumResponse(val album: Album)
 
-data class Album(
+class AlbumDetailsResponse(val album: AlbumDetailsNetwork)
+
+data class AlbumDetailsNetwork(
     val artist: String,
     val image: List<Image>,
     val listeners: String,
@@ -14,8 +17,18 @@ data class Album(
     val tags: Tags,
     val tracks: Tracks,
     val url: String,
-    val wiki: Wiki
-)
+    val wiki: Wiki?
+) {
+
+    fun toAlbumDetails(): AlbumDetails {
+        return AlbumDetails(
+            mbid,
+            name,
+            wiki?.content ?: "",
+            image.associate { it.size to it.text }.getOrElse("medium", { "" }),
+            tracks.track.map { it.toSong() })
+    }
+}
 
 data class Tracks(
     val track: List<Track>
@@ -29,7 +42,9 @@ data class Track(
     val name: String,
     val streamable: Streamable,
     val url: String
-)
+) {
+    fun toSong() = Song(name, url)
+}
 
 data class Attr(
     val rank: String
