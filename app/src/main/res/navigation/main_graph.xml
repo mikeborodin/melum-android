@@ -9,15 +9,22 @@
         android:id="@+id/homeFragment"
         android:name="app.melum.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/home_fragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right">
+
+        tools:layout="@layout/home_fragment">
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+
             android:id="@+id/toExploreFragment"
             app:destination="@id/exploreFragment" />
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+
             android:id="@+id/toAlbumFragment"
             app:destination="@id/albumFragment" />
     </fragment>
@@ -26,12 +33,14 @@
         android:id="@+id/exploreFragment"
         android:name="app.melum.ui.explore.ExploreFragment"
         android:label="ExploreFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
+
         tools:layout="@layout/explore_fragment">
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+
             android:id="@+id/toArtistFragment"
             app:destination="@id/artistFragment" />
     </fragment>
@@ -40,15 +49,17 @@
         android:id="@+id/artistFragment"
         android:name="app.melum.ui.artist.ArtistDetailsFragment"
         android:label="ArtistDetailsFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
+
         tools:layout="@layout/artist_details_fragment">
         <argument
             android:name="artist"
             app:argType="app.melum.entities.Artist" />
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+
             android:id="@+id/toAlbumFragment"
             app:destination="@id/albumFragment" />
     </fragment>
@@ -57,6 +68,7 @@
         android:id="@+id/albumFragment"
         android:name="app.melum.ui.album.AlbumDetailsFragment"
         android:label="AlbumDetailsFragment"
+
         tools:layout="@layout/album_details_fragment">
         <argument
             android:name="album"
@@ -70,6 +82,11 @@
             app:argType="java.lang.Integer" />
 
         <action
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+
             android:id="@+id/toHomeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/main_graph"
