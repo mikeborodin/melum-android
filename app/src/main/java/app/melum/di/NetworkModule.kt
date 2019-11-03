@@ -77,7 +77,7 @@ val networkModule = module {
             .build()
     }
     factory<Retrofit>(named(GOOGLE_API)) {
-        Retrofit.Builder().baseUrl("https://commons.wikimedia.org/"/*/search?tbm=isch*/)
+        Retrofit.Builder().baseUrl("https://commons.wikimedia.org/")
             .addConverterFactory(get())
             .client(get(named(HTTP_UNAUTH)))
             .build()
@@ -94,7 +94,7 @@ val networkModule = module {
     factory<GoogleImageSearchApi> { get<Retrofit>(named(GOOGLE_API)).create(GoogleImageSearchApi::class.java) }
     factory<MusicbrainzApi> { get<Retrofit>(named(MB_API)).create(MusicbrainzApi::class.java) }
 
-    factory<Repository> { RepositoryImpl(get()) }
+    factory<Repository> { RepositoryImpl(get(), get()) }
     factory<ImageSearch> { ImageSearch(get(), get()) }
 
     single<ConnectedManager> { AndroidConnectedManager(androidContext()) }

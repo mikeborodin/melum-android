@@ -7,7 +7,6 @@ import app.melum.common.BaseViewModel
 import app.melum.data.network.images.ImageSearch
 import app.melum.entities.Album
 import app.melum.entities.Artist
-import app.melum.entities.PagedResults
 
 class ArtistDetailsViewModel(private val repo: Repository, private val imageSearch: ImageSearch) :
     BaseViewModel() {
@@ -16,8 +15,8 @@ class ArtistDetailsViewModel(private val repo: Repository, private val imageSear
     val artist: LiveData<Artist> = _artist
 
 
-    private val _albums = MutableLiveData<PagedResults<List<Album>>>()
-    val albums: LiveData<PagedResults<List<Album>>> = _albums
+    private val _albums = MutableLiveData<List<Album>>()
+    val albums: LiveData<List<Album>> = _albums
 
     private val _image = MutableLiveData<String>()
     val image: LiveData<String> = _image

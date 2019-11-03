@@ -20,13 +20,12 @@ class ExploreViewModel(private val repo: Repository) : BaseViewModel() {
 
     val query = ObservableField<String>("")
 
-
     fun search() {
         val q = query.get()?.takeIf { it.isNotBlank() } ?: return
         query.set("")
         launchHandled({ repo.searchArtists(q) }, {
-            _searchResults.postValue(it.data)
-            _isEmptyState.postValue(it.data.isEmpty())
+            _searchResults.postValue(it)
+            _isEmptyState.postValue(it.isEmpty())
         })
     }
 }

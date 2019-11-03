@@ -14,43 +14,147 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_medium"
-            android:background="?selectableItemBackgroundBorderless"
-            android:contentDescription="back"
-            android:padding="@dimen/size_medium"
-            android:src="@drawable/ic_arrow_back"
-            android:tint="@color/onBackground"
-            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_medium"
-            android:text="Album"
-            android:textSize="@dimen/font_large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            app:layout_constraintBottom_toBottomOf="@id/btnSave"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:id="@+id/rvSongs"
-            tools:listitem="@layout/item_song"
-            android:layout_height="0dp" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:background="@color/darker">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/ctToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:collapsedTitleGravity="start"
+                    app:expandedTitleGravity="bottom|start"
+                    app:expandedTitleMarginBottom="@dimen/size_large"
+                    app:expandedTitleMarginStart="24dp"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:title="@{viewModel.album.title}"
+                    tools:title="@string/album_details_title">
+
+                    <ImageView
+                        android:id="@+id/albumCover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foreground="#C0000000"
+                        android:transitionName="@{`cover`+viewModel.album.id}"
+                        app:crop="@{true}"
+                        app:imageUrl="@{viewModel.album.cover}"
+                        app:layout_collapseMode="parallax"
+                        tools:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
+
+                    <TextView
+                        android:id="@+id/tvArtistName"
+                        style="@style/Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|start"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@{`by `+viewModel.artist.name}"
+                        tools:text="by Frank Sinatra" />
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_gravity="top"
+                        app:layout_collapseMode="pin"
+                        app:navigationIcon="@drawable/ic_arrow_back"
+                        app:subtitle="by Jimmys"
+                        app:titleTextColor="@color/onBackground" />
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSongs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="@dimen/size_medium"
+                android:paddingBottom="@dimen/size_large"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:listitem="@layout/item_song" />
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
         <include layout="@layout/loader" />
+
+        <TextView
+            android:id="@+id/ivErrorState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔇"
+            android:textSize="@dimen/size_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/tvErrorState"
+            style="@style/Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_medium"
+            android:text="Something went wrong\n while loading album! Possibly API fault."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivEmptyState" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/gErrorState"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="tvErrorState,ivErrorState"
+            app:showIf="@{viewModel.isErrorState &amp;&amp; !viewModel.loading}"
+            tools:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/ivEmptyState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📭"
+            android:textSize="@dimen/size_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/tvEmptyState"
+            style="@style/Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_medium"
+            android:text="This album has no tracks on the server..."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivEmptyState" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/gEmptyState"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="tvEmptyState,ivEmptyState"
+            app:showIf="@{viewModel.isEmptyState &amp;&amp; !viewModel.loading}"
+            tools:visibility="gone" />
+
 
         <Button
             android:id="@+id/btnSave"
@@ -58,10 +162,24 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/font_medium"
-            android:text="Save"
+            android:text="Save to Favorites"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:showIf="@{viewModel.canSave}" />
+
+        <Button
+            android:id="@+id/btnRemove"
+            style="@style/SecondaryButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/font_medium"
+            android:text="Remove from favorites"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:showIf="@{viewModel.canRemove}" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

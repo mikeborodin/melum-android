@@ -41,8 +41,8 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val frame = FrameLayout(this).apply {
             layoutParams = FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.MATCH_PARENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
             )
             setBackgroundColor(findColor(R.color.background))
         }
@@ -65,8 +65,8 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
     private fun observeLoaderAndError() {
         with(viewModel) {
             loading.observe(
-                    this@BaseActivity,
-                    Observer<Boolean> { it?.run { showProgress(this) } })
+                this@BaseActivity,
+                Observer<Boolean> { it?.run { showProgress(this) } })
             errors.observe(this@BaseActivity, Observer { it?.get()?.let { showError(it) } })
         }
     }
@@ -91,30 +91,30 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
     private fun observeConnectivityState() {
         connectedManager.isConnected.observe(this, Observer { c ->
             messageView?.animate()
-                    ?.setInterpolator(AccelerateInterpolator())
-                    ?.let {
-                        if (c) {
-                            it.translationY(-messageView!!.height.toFloat())
-                                    ?.alpha(0f)
-                                    ?.withEndAction {
-                                        messageView?.hide()
-                                    }
-                        } else {
-                            messageView?.alpha = 0f
-                            messageView?.show()
-                            it.translationY(0f)
-                                    ?.alpha(1.0f)
-                        }
+                ?.setInterpolator(AccelerateInterpolator())
+                ?.let {
+                    if (c) {
+                        it.translationY(-messageView!!.height.toFloat())
+                            ?.alpha(0f)
+                            ?.withEndAction {
+                                messageView?.hide()
+                            }
+                    } else {
+                        messageView?.alpha = 0f
+                        messageView?.show()
+                        it.translationY(0f)
+                            ?.alpha(1.0f)
                     }
-                    ?.apply { duration = 300 }
-                    ?.start()
+                }
+                ?.apply { duration = 300 }
+                ?.start()
         })
     }
 
     private fun buildMessageView() = TextView(this).apply {
         layoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
         )
         visibility = View.GONE
         text = getString(R.string.network_error_message)
@@ -123,10 +123,10 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
         background = ColorDrawable(findColor(R.color.offline_panel_background))
         val padding = resources.getDimensionPixelSize(R.dimen.margin_4dp)
         setPadding(
-                padding,
-                resources.getDimensionPixelSize(R.dimen.status_bar_height) - padding,
-                padding,
-                padding
+            padding,
+            padding,
+            padding,
+            padding
         )
         gravity = Gravity.TOP
         setOnClickListener {

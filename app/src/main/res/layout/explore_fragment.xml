@@ -77,6 +77,8 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="Search"
+            android:drawableStart="@drawable/ic_search"
+            android:drawableTint="@color/onPrimary"
             app:layout_constraintBottom_toBottomOf="@id/tilSearch"
             app:layout_constraintEnd_toEndOf="@id/tilSearch"
             app:layout_constraintTop_toTopOf="@id/tilSearch"

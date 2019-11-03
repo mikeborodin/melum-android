@@ -14,11 +14,10 @@ import app.melum.common.RecyclerBindingAdapter
 import app.melum.common.hideKeyboard
 import app.melum.entities.Artist
 import kotlinx.android.synthetic.main.explore_fragment.*
-import kotlin.reflect.KClass
 
 
-class ExploreFragment : BaseFragment<ExploreViewModel>() {
-    override val viewModelClass: KClass<ExploreViewModel> = ExploreViewModel::class
+class ExploreFragment : BaseFragment<ExploreViewModel>(ExploreViewModel::class) {
+
     override val layoutId: Int = R.layout.explore_fragment
 
     private val artistsAdapter = RecyclerBindingAdapter<Artist>(R.layout.item_artist_result)
@@ -47,12 +46,14 @@ class ExploreFragment : BaseFragment<ExploreViewModel>() {
         rvArtists.run {
             adapter = artistsAdapter.also {
                 it.setOnItemClickListener { pos, item ->
+                    hideKeyboard()
                     navController.navigate(ExploreFragmentDirections.toArtistFragment(item))
                 }
             }
             layoutManager = LinearLayoutManager(context)
         }
         btnBack.setOnClickListener {
+            hideKeyboard()
             navController.popBackStack()
         }
 

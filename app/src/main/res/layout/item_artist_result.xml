@@ -15,32 +15,33 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:background="?selectableItemBackground"
-        android:layout_marginBottom="@dimen/size_medium">
+        android:layout_marginBottom="@dimen/size_small">
 
         <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_margin="@dimen/size_medium"
+            android:layout_height="60dp"
             android:contentDescription="artistImage"
-            app:imageUrl="@{item.image}"
-            app:corners="@{@dimen/size_medium}"
-            app:placeholder="@{@drawable/ic_launcher_foreground}"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:background="#555"
+            android:src="@drawable/ic_person"
+            android:tint="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="0dp"
-            app:layout_constrainedWidth="true"
             android:layout_height="wrap_content"
+            android:padding="@dimen/size_small"
             android:text="@{item.name}"
             android:textSize="@dimen/font_medium"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivImage"
-            app:layout_constraintTop_toTopOf="@+id/ivImage"
-            android:padding="@dimen/size_small"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Artist Test Name. Really large text here Artist Name Really large text here Artist Name Really large text here" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

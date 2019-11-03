@@ -15,11 +15,10 @@ import app.melum.BR
 import app.melum.R
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import java.net.UnknownHostException
 import kotlin.reflect.KClass
 
-abstract class BaseFragment<T : BaseViewModel> : Fragment() {
-
-    abstract val viewModelClass: KClass<T>
+abstract class BaseFragment<T : BaseViewModel>(private val viewModelClass: KClass<T>) : Fragment() {
 
     open val viewModel: T by lazy { getViewModel(viewModelClass) }
 
@@ -34,10 +33,9 @@ abstract class BaseFragment<T : BaseViewModel> : Fragment() {
         find<View>(progressBarId)
     }
 
-    protected val navController : NavController by lazy {
+    protected val navController: NavController by lazy {
         findNavController()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +64,11 @@ abstract class BaseFragment<T : BaseViewModel> : Fragment() {
             })
             errors.observe(this@BaseFragment, Observer<Event<Throwable>> {
                 it?.get()?.run {
-                    showMessage(message ?: "unknown error")
+                    val message = when (this) {
+                        is UnknownHostException -> getString(R.string.network_error_message)
+                        else -> message ?: "unknown error"
+                    }
+                    showMessage(message)
                 }
             })
         }
@@ -88,6 +90,5 @@ abstract class BaseFragment<T : BaseViewModel> : Fragment() {
                 .show()
         }
     }
-
 
 }

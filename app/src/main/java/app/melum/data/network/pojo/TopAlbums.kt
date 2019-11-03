@@ -2,6 +2,7 @@ package app.melum.data.network.pojo
 
 import app.melum.entities.Album
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class TopAbumsResponse(
     val topalbums: Topalbums
@@ -47,7 +48,7 @@ data class AlbumNetwork(
 ) {
     fun toAlbum(): Album {
         return Album(
-            mbid ?: "",
+            mbid ?: UUID.randomUUID().toString(),
             name,
             image.associate { it.size to it.text }.getOrElse("large", { "" })
         )

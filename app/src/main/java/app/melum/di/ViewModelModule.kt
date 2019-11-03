@@ -10,8 +10,8 @@ import org.koin.dsl.module
 
 val viewModuleModule = module {
     viewModel { MainViewModel() }
-    viewModel { HomeViewModel() }
+    viewModel { HomeViewModel(get()) }
     viewModel { ExploreViewModel(get()) }
     viewModel { ArtistDetailsViewModel(get(), get()) }
-    viewModel { AlbumDetailsViewModel(get()) }
+    viewModel { AlbumDetailsViewModel(get(), get()) }
 }

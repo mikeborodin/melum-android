@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="app.melum.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/home_fragment">
+        tools:layout="@layout/home_fragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right">
         <action
             android:id="@+id/toExploreFragment"
             app:destination="@id/exploreFragment" />
@@ -22,6 +26,10 @@
         android:id="@+id/exploreFragment"
         android:name="app.melum.ui.explore.ExploreFragment"
         android:label="ExploreFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
         tools:layout="@layout/explore_fragment">
         <action
             android:id="@+id/toArtistFragment"
@@ -32,6 +40,10 @@
         android:id="@+id/artistFragment"
         android:name="app.melum.ui.artist.ArtistDetailsFragment"
         android:label="ArtistDetailsFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
         tools:layout="@layout/artist_details_fragment">
         <argument
             android:name="artist"
@@ -53,11 +65,21 @@
         <argument
             android:name="artist"
             app:argType="app.melum.entities.Artist" />
+        <argument
+            android:name="position"
+            app:argType="java.lang.Integer" />
+
         <action
             android:id="@+id/toHomeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/main_graph"
             app:popUpToInclusive="true" />
+
+        <argument
+            android:name="isSaved"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
     </fragment>
 
 </navigation>
