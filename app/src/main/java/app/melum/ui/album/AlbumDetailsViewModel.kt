@@ -25,9 +25,6 @@ class AlbumDetailsViewModel(
     private val _songs = MutableLiveData<List<Song>>()
     val songs: LiveData<List<Song>> = _songs
 
-    private val _position = MutableLiveData<String>()
-    val position: LiveData<String> = _position
-
 
     private val _savedEvent = MutableLiveData<Unit>()
     val savedEvent: LiveData<Unit> = _savedEvent
@@ -71,7 +68,6 @@ class AlbumDetailsViewModel(
             }, {
                 _isErrorState.postValue(true)
             })
-
         }
     }
 

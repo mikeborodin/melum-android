@@ -11,6 +11,8 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
+//Responsibility is to check if Internet connection is present
+
 class AndroidConnectedManager(private val appContext: Context) :
     ConnectedManager {
 
@@ -21,8 +23,10 @@ class AndroidConnectedManager(private val appContext: Context) :
     override val currentValue: Boolean
         get() = _isConnected.value ?: false
 
+
     override fun startListening() {
         refresh()
+        //Depending on API level we choose the mechanism of connectivity monitoring
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             connectivityManager().registerDefaultNetworkCallback(callback)
         } else {
@@ -42,7 +46,7 @@ class AndroidConnectedManager(private val appContext: Context) :
     }
 
     private val callback by lazy {
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        @RequiresApi(Build.VERSION_CODES.N)
         object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network?) {
                 network?.let {

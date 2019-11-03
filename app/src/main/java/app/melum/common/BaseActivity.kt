@@ -20,11 +20,10 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.net.UnknownHostException
 import kotlin.reflect.KClass
 
-abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<T : BaseViewModel>(private val viewModelClass: KClass<T>) :
+    AppCompatActivity() {
 
     protected var binding: ViewDataBinding? = null
-
-    protected abstract val viewModelClass: KClass<T>
 
     protected val viewModel: T by lazy { getViewModel(viewModelClass) }
 

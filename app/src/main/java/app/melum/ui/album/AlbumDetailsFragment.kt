@@ -2,6 +2,7 @@ package app.melum.ui.album
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.View
@@ -24,19 +25,32 @@ class AlbumDetailsFragment : BaseFragment<AlbumDetailsViewModel>(AlbumDetailsVie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        if (Build.VERSION.SDK_INT > 21)
+            sharedElementEnterTransition =
+                TransitionInflater.from(context).inflateTransition(android.R.transition.move)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        AlbumDetailsFragmentArgs.fromBundle(arguments ?: bundleOf()).run {
+            viewModel.setInput(album, artist, isSaved)
+        }
+        initList()
+        setListeners()
+    }
 
-        val album = AlbumDetailsFragmentArgs.fromBundle(arguments ?: bundleOf()).album
-        val artist = AlbumDetailsFragmentArgs.fromBundle(arguments ?: bundleOf()).artist
-        val isSaved = AlbumDetailsFragmentArgs.fromBundle(arguments ?: bundleOf()).isSaved
 
-        viewModel.setInput(album, artist, isSaved)
+    override fun observeLiveData() {
+        viewModel.songs.observe(this, Observer {
+            songsAdapter.items = it.toMutableList()
+        })
 
+        viewModel.savedEvent.observe(this, Observer {
+            navController.navigate(AlbumDetailsFragmentDirections.toHomeFragment())
+        })
+    }
+
+    private fun setListeners() {
         btnSave.setOnClickListener {
             viewModel.save()
         }
@@ -46,8 +60,10 @@ class AlbumDetailsFragment : BaseFragment<AlbumDetailsViewModel>(AlbumDetailsVie
         toolbar.setNavigationOnClickListener {
             navController.popBackStack()
         }
-
         initFadeoutArtist()
+    }
+
+    private fun initList() {
         rvSongs.run {
             layoutManager = LinearLayoutManager(context)
             adapter = songsAdapter.also {
@@ -66,20 +82,13 @@ class AlbumDetailsFragment : BaseFragment<AlbumDetailsViewModel>(AlbumDetailsVie
 
     private fun initFadeoutArtist() {
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            tvArtistName.alpha = 1.0f - Math.abs(
+            val alpha = 1.0f - Math.abs(
                 verticalOffset / appBarLayout.totalScrollRange.toFloat()
             )
+            tvArtistName.alpha = alpha
+            tvSongCount.alpha = alpha
         })
     }
 
-    override fun observeLiveData() {
-        viewModel.songs.observe(this, Observer {
-            songsAdapter.items = it.toMutableList()
-        })
-
-        viewModel.savedEvent.observe(this, Observer {
-            navController.navigate(AlbumDetailsFragmentDirections.toHomeFragment())
-        })
-    }
 
 }

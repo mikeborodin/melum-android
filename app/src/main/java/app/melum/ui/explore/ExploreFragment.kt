@@ -24,25 +24,17 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(ExploreViewModel::class) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnNext.setOnClickListener {
-            viewModel.search()
-            hideKeyboard()
-        }
+        setListeners()
+        initList()
+    }
 
-        etSearch.requestFocus()
-        val imm =
-            getSystemService<InputMethodManager>(etSearch.context, InputMethodManager::class.java)
-        imm!!.showSoftInput(etSearch, SHOW_IMPLICIT)
+    override fun observeLiveData() {
+        viewModel.searchResults.observe(this, Observer {
+            artistsAdapter.items = it.toMutableList()
+        })
+    }
 
-        etSearch.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.search()
-                hideKeyboard()
-                true
-            }
-            false
-        }
-
+    private fun initList() {
         rvArtists.run {
             adapter = artistsAdapter.also {
                 it.setOnItemClickListener { pos, item ->
@@ -52,18 +44,32 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(ExploreViewModel::class) 
             }
             layoutManager = LinearLayoutManager(context)
         }
+    }
+
+    private fun setListeners() {
+        etSearch.requestFocus()
+
+        getSystemService<InputMethodManager>(
+            etSearch.context, InputMethodManager::class.java
+        )?.showSoftInput(etSearch, SHOW_IMPLICIT)
+
+        btnNext.setOnClickListener {
+            viewModel.search()
+            hideKeyboard()
+        }
+        etSearch.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.search()
+                hideKeyboard()
+                true
+            }
+            false
+        }
         btnBack.setOnClickListener {
             hideKeyboard()
             navController.popBackStack()
         }
-
-
     }
 
-    override fun observeLiveData() {
-        viewModel.searchResults.observe(this, Observer {
-            artistsAdapter.items = it.toMutableList()
-        })
-    }
 
 }

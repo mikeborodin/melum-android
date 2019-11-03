@@ -27,7 +27,11 @@ class ArtistDetailsFragment : BaseFragment<ArtistDetailsViewModel>(ArtistDetails
         super.onViewCreated(view, savedInstanceState)
         val artist = ArtistDetailsFragmentArgs.fromBundle(arguments ?: bundleOf()).artist
         viewModel.setInput(artist)
+        initList(artist)
+        setListeners()
+    }
 
+    private fun initList(artist: Artist) {
         rvAlbums.run {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = albumsAdapter.also {
@@ -36,6 +40,9 @@ class ArtistDetailsFragment : BaseFragment<ArtistDetailsViewModel>(ArtistDetails
                 }
             }
         }
+    }
+
+    private fun setListeners() {
         btnPlay.setOnClickListener {
             shareArtist()
         }
@@ -46,6 +53,7 @@ class ArtistDetailsFragment : BaseFragment<ArtistDetailsViewModel>(ArtistDetails
             navController.popBackStack()
         }
     }
+
 
     private fun shareArtist() {
         val artist = ArtistDetailsFragmentArgs.fromBundle(arguments ?: bundleOf()).artist

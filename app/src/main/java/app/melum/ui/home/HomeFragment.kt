@@ -23,9 +23,18 @@ class HomeFragment : BaseFragment<HomeViewModel>(HomeViewModel::class) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnExplore.setOnClickListener {
-            navController.navigate(HomeFragmentDirections.toExploreFragment())
-        }
+        viewModel.load()
+        initList()
+        setListeners()
+    }
+
+    override fun observeLiveData() {
+        viewModel.savedAlbums.observe(this, Observer {
+            songsAdapter.items = it.toMutableList()
+        })
+    }
+
+    private fun initList() {
         rvSavedAlbums.run {
             layoutManager = GridLayoutManager(context, 2)
             adapter = songsAdapter.also {
@@ -34,7 +43,12 @@ class HomeFragment : BaseFragment<HomeViewModel>(HomeViewModel::class) {
                 }
             }
         }
-        viewModel.load()
+    }
+
+    private fun setListeners() {
+        btnExplore.setOnClickListener {
+            navController.navigate(HomeFragmentDirections.toExploreFragment())
+        }
     }
 
     private fun openDetails(pos: Int, item: Album) {
@@ -54,12 +68,6 @@ class HomeFragment : BaseFragment<HomeViewModel>(HomeViewModel::class) {
                     FragmentNavigatorExtras(it)
                 }
         )
-    }
-
-    override fun observeLiveData() {
-        viewModel.savedAlbums.observe(this, Observer {
-            songsAdapter.items = it.toMutableList()
-        })
     }
 
 }

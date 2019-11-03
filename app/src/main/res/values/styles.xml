@@ -7,6 +7,16 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/onBackground</item>
         <item name="boxStrokeColor">@color/onBackground</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
+    </style>
+
+    <style name="WindowAnimationStyle">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
     <style name="Title" parent="@style/AppTheme">

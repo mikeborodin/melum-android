@@ -1,4 +1,4 @@
-package app.melum.ui
+package app.melum.ui.main
 
 import app.melum.common.BaseViewModel
 

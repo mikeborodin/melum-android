@@ -19,12 +19,26 @@ class MelumApp : Application(), CustomActivityLifecycleCallback, KoinComponent {
 
     private var handler: Handler? = null
 
-
     override fun onCreate() {
         super.onCreate()
         initKoin()
         initRealm()
+        //needed for app to listen connectivity state
         this.registerActivityLifecycleCallbacks(this)
+    }
+
+    override fun onActivityResumed(activity: Activity?) {
+        super.onActivityResumed(activity)
+        activity?.let {
+            currentActivityReference = WeakReference(it)
+            checkIfForeground()
+        }
+    }
+
+    override fun onActivityPaused(activity: Activity?) {
+        super.onActivityPaused(activity)
+        currentActivityReference = null
+        onBackground()
     }
 
     private fun initKoin() {
@@ -40,41 +54,27 @@ class MelumApp : Application(), CustomActivityLifecycleCallback, KoinComponent {
         Realm.setDefaultConfiguration(configuration)
     }
 
-    override fun onActivityResumed(activity: Activity?) {
-        super.onActivityResumed(activity)
-        activity?.let {
-            currentActivityReference = WeakReference(it)
-            determineForegroundStatus()
+    private fun checkIfForeground() {
+        if (isApplicationInBackground.get()) {
+            onForeground()
+            isApplicationInBackground.set(false)
         }
     }
 
-    override fun onActivityPaused(activity: Activity?) {
-        super.onActivityPaused(activity)
-        currentActivityReference = null
-        onEnterBackground()
-    }
-
-    private fun determineForegroundStatus() {
-        if (applicationBackgrounded.get()) {
-            onEnterForeground()
-            applicationBackgrounded.set(false)
-        }
-    }
-
-    private fun onEnterForeground() {
+    private fun onForeground() {
         val connectedManager: ConnectedManager by inject()
         connectedManager.startListening()
     }
 
-    private fun onEnterBackground() {
+    private fun onBackground() {
         handler?.removeCallbacksAndMessages(null)
         val connectedManager: ConnectedManager by inject()
         connectedManager.stopListening()
-        applicationBackgrounded.set(true)
+        isApplicationInBackground.set(true)
     }
 
     companion object {
-        private val applicationBackgrounded = AtomicBoolean(true)
+        private val isApplicationInBackground = AtomicBoolean(true)
         private var currentActivityReference: WeakReference<Activity>? = null
     }
 }

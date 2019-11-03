@@ -41,7 +41,7 @@
                         android:id="@+id/albumCover"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:foreground="#C0000000"
+                        android:foreground="@color/overlay"
                         android:transitionName="@{`cover`+viewModel.album.id}"
                         app:crop="@{true}"
                         app:imageUrl="@{viewModel.album.cover}"
@@ -59,6 +59,18 @@
                         android:layout_marginBottom="8dp"
                         android:text="@{`by `+viewModel.artist.name}"
                         tools:text="by Frank Sinatra" />
+
+
+                    <TextView
+                        android:id="@+id/tvSongCount"
+                        style="@style/Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@{viewModel.songs.size()+` songs`}"
+                        tools:text="12 songs" />
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"

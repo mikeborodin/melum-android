@@ -17,7 +17,6 @@ class ExploreViewModel(private val repo: Repository) : BaseViewModel() {
 
     val isEmptyState: LiveData<Boolean> = _isEmptyState
 
-
     val query = ObservableField<String>("")
 
     fun search() {

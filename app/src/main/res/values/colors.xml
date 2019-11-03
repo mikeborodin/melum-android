@@ -10,4 +10,5 @@
     <color name="onBackground">#FFFFFF</color>
     <color name="onBackgroundSecondary">#B8B8B8</color>
     <color name="darker">#222</color>
+    <color name="overlay">#B2000000</color>
 </resources>

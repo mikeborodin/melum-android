@@ -14,7 +14,6 @@ class ArtistDetailsViewModel(private val repo: Repository, private val imageSear
     private val _artist = MutableLiveData<Artist>()
     val artist: LiveData<Artist> = _artist
 
-
     private val _albums = MutableLiveData<List<Album>>()
     val albums: LiveData<List<Album>> = _albums
 
@@ -35,9 +34,6 @@ class ArtistDetailsViewModel(private val repo: Repository, private val imageSear
         }, {
             _image.postValue(it)
         })
-
-        //todo: will call getArtistTopAlbums
     }
-
 
 }
