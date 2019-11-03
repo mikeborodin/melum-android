@@ -28,15 +28,15 @@ android {
     }
 
     flavorDimensions "env"
-    productFlavors{
-        dev{
+    productFlavors {
+        dev {
             dimension "env"
-            buildConfigField "String", "API_BASE_URL",  lastfm_base_url
+            buildConfigField "String", "API_BASE_URL", lastfm_base_url
             buildConfigField "String", "API_KEY", lastfm_api_key
         }
-        prod{
+        prod {
             dimension "env"
-            buildConfigField "String", "API_BASE_URL",  lastfm_base_url
+            buildConfigField "String", "API_BASE_URL", lastfm_base_url
             buildConfigField "String", "API_KEY", lastfm_api_key
         }
     }
@@ -50,7 +50,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(":domain")
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.1.0"
@@ -75,6 +75,8 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "io.mockk:mockk:1.9"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.0.0'

@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface LastFmApi {
 
     @GET("?method=artist.search")
-    suspend fun searchArtist(@Query("artist") artist: String, @Query("limit") limit: Int = 20): SearchArtistResponse
+    suspend fun searchArtist(@Query("artist") artist: String, @Query("limit") limit: Int): SearchArtistResponse
 
     @GET("?method=artist.gettopalbums")
     suspend fun getArtistTopAlbums(@Query("artist") artist: String): TopAbumsResponse

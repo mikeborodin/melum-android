@@ -7,7 +7,8 @@ import io.realm.*
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class AlbumsDatabase(val config: RealmConfiguration) {
+
+open class AlbumsDatabase(val config: RealmConfiguration) {
 
     fun <T> Realm.with(func: (Realm) -> T?): T? =
         use {

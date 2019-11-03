@@ -8,10 +8,11 @@ import app.melum.entities.AlbumDetails
 import app.melum.entities.Artist
 
 
-class RepositoryImpl(private val network: LastFmApi, private val db: AlbumsDatabase) : Repository {
+open class RepositoryImpl(private val network: LastFmApi, private val db: AlbumsDatabase) :
+    Repository {
 
     override suspend fun searchArtists(query: String): List<Artist> {
-        val response = network.searchArtist(query)
+        val response = network.searchArtist(query, 20)
         return response.results.artistmatches.artist.map { it.toArtist() }
     }
 
