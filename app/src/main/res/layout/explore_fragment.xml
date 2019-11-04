@@ -57,7 +57,7 @@
                 android:id="@+id/etSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Type here..."
+                android:hint="@string/explore_type_here"
                 android:imeActionLabel="Done"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
@@ -68,17 +68,16 @@
 
 
         <Button
-            android:id="@+id/btnNext"
+            android:id="@+id/btnSearch"
             style="@style/PrimaryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/font_medium"
-            android:layout_marginEnd="@dimen/size_large"
+            android:layout_marginEnd="@dimen/size_medium"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text="Search"
+            android:text="@string/explore_search"
             android:drawableStart="@drawable/ic_search"
-            android:drawableTint="@color/onPrimary"
             app:layout_constraintBottom_toBottomOf="@id/tilSearch"
             app:layout_constraintEnd_toEndOf="@id/tilSearch"
             app:layout_constraintTop_toTopOf="@id/tilSearch"
@@ -90,7 +89,7 @@
             android:layout_height="0dp"
             android:padding="@dimen/size_medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnNext"
+            app:layout_constraintTop_toBottomOf="@+id/tilSearch"
             tools:listitem="@layout/item_artist_result" />
 
         <include layout="@layout/loader" />
@@ -112,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_medium"
-            android:text="Results are empty"
+            android:text="@string/explore_empty_message"
             android:textSize="@dimen/font_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -53,7 +53,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel>(ExploreViewModel::class) 
             etSearch.context, InputMethodManager::class.java
         )?.showSoftInput(etSearch, SHOW_IMPLICIT)
 
-        btnNext.setOnClickListener {
+        btnSearch.setOnClickListener {
             viewModel.search()
             hideKeyboard()
         }

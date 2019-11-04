@@ -35,6 +35,7 @@ open class RepositoryImpl(private val network: LastFmApi, private val db: Albums
     }
 
     override suspend fun saveAlbum(album: Album) {
+        check(album.songs.isNotEmpty()) { "Can not save empty album" }
         db.saveAlbum(album)
     }
 

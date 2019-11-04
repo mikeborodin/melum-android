@@ -38,7 +38,7 @@
                     tools:title="@string/album_details_title">
 
                     <ImageView
-                        android:id="@+id/albumCover"
+                        android:id="@+id/ivAlbumCover"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:foreground="@color/overlay"
@@ -108,7 +108,7 @@
             android:id="@+id/ivErrorState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🔇"
+            android:text="@string/album_details_error_icon"
             android:textSize="@dimen/size_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_medium"
-            android:text="Something went wrong\n while loading album! Possibly API fault."
+            android:text="@string/album_details_error_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivEmptyState" />
@@ -140,7 +140,7 @@
             android:id="@+id/ivEmptyState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📭"
+            android:text="@string/album_details_empty_icon"
             android:textSize="@dimen/size_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_medium"
-            android:text="This album has no tracks on the server..."
+            android:text="@string/album_details_empty_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivEmptyState" />
@@ -174,7 +174,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/font_medium"
-            android:text="Save to Favorites"
+            android:text="@string/album_details_save_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +186,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/font_medium"
-            android:text="Remove from favorites"
+            android:text="@string/album_details_remove_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

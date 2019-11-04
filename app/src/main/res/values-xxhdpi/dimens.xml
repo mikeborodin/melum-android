@@ -12,6 +12,6 @@
     <dimen name="font_medium">16sp</dimen>
     <dimen name="font_large">24sp</dimen>
     <dimen name="artist_image_height">300dp</dimen>
-    <dimen name="home_grid_size">180</dimen>
+    <dimen name="home_grid_size">100dp</dimen>
 
 </resources>

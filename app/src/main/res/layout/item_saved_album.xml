@@ -13,8 +13,8 @@
     </data>
 
     <FrameLayout
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="@dimen/home_grid_size"
+        android:layout_height="@dimen/home_grid_size"
         android:layout_margin="@dimen/size_small"
         android:layout_marginBottom="@dimen/size_medium">
 
@@ -29,16 +29,6 @@
             app:imageUrl="@{item.cover}"
             app:placeholder="@{@drawable/ic_launcher_foreground}"
             tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
-
-        <!--        <ImageView
-                    android:id="@+id/ivFeatured"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|end"
-                    android:layout_marginTop="@dimen/size_medium"
-                    android:layout_marginEnd="24dp"
-                    android:src="@drawable/ic_star"
-                    android:tint="@color/colorAccent" />-->
 
         <TextView
             android:layout_width="wrap_content"
