@@ -16,7 +16,6 @@ class RepositoryTest {
     @Test
     fun `repository should call api`() {
         val artist = "Metallica"
-
         runBlocking {
             val db: AlbumsDatabase = mockk()
             val network: LastFmApi = mockk()
@@ -33,7 +32,7 @@ class RepositoryTest {
             val list: List<Artist> = repo.searchArtists(artist)
 
             assert(list.size == 1) { "Repository result should be not empty" }
-            assert(list[0].name == artist) { "Repository result should be not empty" }
+            assert(list[0].name == artist) { "Repository result should be relevant" }
         }
     }
 
