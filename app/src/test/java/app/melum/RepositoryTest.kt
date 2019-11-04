@@ -5,7 +5,9 @@ import app.melum.data.database.AlbumsDatabase
 import app.melum.data.network.LastFmApi
 import app.melum.data.network.pojo.*
 import app.melum.data.repository.RepositoryImpl
+import app.melum.entities.Album
 import app.melum.entities.Artist
+import app.melum.entities.Song
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
@@ -14,7 +16,7 @@ import org.junit.Test
 class RepositoryTest {
 
     @Test
-    fun `repository should call api`() {
+    fun repository_shouldCallApi() {
         val artist = "Metallica"
         runBlocking {
             val db: AlbumsDatabase = mockk()
@@ -36,10 +38,36 @@ class RepositoryTest {
         }
     }
 
-    fun generateFakeDataForArtist(artist: String) = SearchArtistResponse(
+
+    @Test
+    fun repository_shouldCallDb() {
+
+        runBlocking {
+            val db: AlbumsDatabase = mockk()
+            val network: LastFmApi = mockk()
+            every {
+                runBlocking {
+                    db.getSavedAlbums()
+                }
+            } returns generateFakeSavedDataAlbums()
+
+            val repo: Repository = RepositoryImpl(network, db)
+            val list: List<Album> = repo.getSavedAlbums()
+
+            assert(list.size == 1 && list.first().title == "Album Test") { "Results should be the same" }
+        }
+    }
+
+
+    private fun generateFakeSavedDataAlbums(): List<Album> {
+        return listOf(
+            Album("id", "Album Test", "image", mutableListOf(Song("song", "stream")))
+        )
+    }
+
+    private fun generateFakeDataForArtist(artist: String) = SearchArtistResponse(
         Results(
-            For("aaa"),
-            ArtistMatches(
+            For("aaa"), ArtistMatches(
                 listOf(
                     ArtistNetwork(
                         listOf(Image("medium", "medium")),
