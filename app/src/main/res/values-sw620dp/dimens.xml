@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <dimen name="margin_4dp">3.44dp</dimen>
+    <dimen name="status_bar_height">41.33dp</dimen>
+
+    <dimen name="size_small">13.78dp</dimen>
+    <dimen name="size_medium">27.56dp</dimen>
+    <dimen name="size_large">82.67dp</dimen>
+
+
+    <dimen name="font_small">17.22sp</dimen>
+    <dimen name="font_medium">27.56sp</dimen>
+    <dimen name="font_large">41.33sp</dimen>
+    <dimen name="artist_image_height">516.67dp</dimen>
+    <dimen name="home_grid_size">275.56dp</dimen>
+
+</resources>
