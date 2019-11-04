@@ -1,6 +1,7 @@
 package app.melum.ui.artist
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -47,10 +48,21 @@ class ArtistDetailsFragment : BaseFragment<ArtistDetailsViewModel>(ArtistDetails
             shareArtist()
         }
         btnShare.setOnClickListener {
-            shareArtist()
+            openArtistUrl()
         }
         btnBack.setOnClickListener {
             navController.popBackStack()
+        }
+    }
+
+    private fun openArtistUrl() {
+        val artist = ArtistDetailsFragmentArgs.fromBundle(arguments ?: bundleOf()).artist
+        Intent(Intent.ACTION_VIEW, Uri.parse(artist.link)).takeIf {
+            activity != null && it.resolveActivity(activity!!.packageManager) != null
+        }?.run {
+            startActivity(
+                Intent.createChooser(this, "Share ${artist.name} to...")
+            )
         }
     }
 

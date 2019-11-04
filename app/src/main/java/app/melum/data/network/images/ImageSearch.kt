@@ -3,7 +3,7 @@ package app.melum.data.network.images
 
 class ImageSearch(
     private val mb: MusicbrainzApi,
-    private val wiki: GoogleImageSearchApi
+    private val wiki: WikiCommonsSearchApi
 ) {
 
     suspend fun getImageUrl(q: String): String {
@@ -20,7 +20,5 @@ class ImageSearch(
             val prefix = "https://upload.wikimedia.org/wikipedia"
             prefix + url
         }.getOrElse { "" }
-
     }
-
 }

@@ -7,9 +7,9 @@ import app.melum.data.connectivity.ConnectedManager
 import app.melum.data.network.AddApiKeyInterceptor
 import app.melum.data.network.LastFmApi
 import app.melum.data.network.PrettyLogger
-import app.melum.data.network.images.GoogleImageSearchApi
 import app.melum.data.network.images.ImageSearch
 import app.melum.data.network.images.MusicbrainzApi
+import app.melum.data.network.images.WikiCommonsSearchApi
 import app.melum.data.repository.RepositoryImpl
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -91,7 +91,7 @@ val networkModule = module {
     }
 
     factory<LastFmApi> { get<Retrofit>(named(LASTFM_API)).create(LastFmApi::class.java) }
-    factory<GoogleImageSearchApi> { get<Retrofit>(named(GOOGLE_API)).create(GoogleImageSearchApi::class.java) }
+    factory<WikiCommonsSearchApi> { get<Retrofit>(named(GOOGLE_API)).create(WikiCommonsSearchApi::class.java) }
     factory<MusicbrainzApi> { get<Retrofit>(named(MB_API)).create(MusicbrainzApi::class.java) }
 
     factory<Repository> { RepositoryImpl(get(), get()) }
