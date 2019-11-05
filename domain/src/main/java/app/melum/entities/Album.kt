@@ -9,6 +9,6 @@ data class Album(
     var songs: MutableList<Song> = mutableListOf(),
     var artist: Artist? = null,
     val description: String = ""
-    ) : Serializable
+) : Serializable
 
 
