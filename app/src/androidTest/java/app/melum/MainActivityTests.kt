@@ -3,13 +3,14 @@ package app.melum
 import android.content.res.Resources
 import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.filters.SmallTest
+import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import app.melum.common.RecyclerBindingAdapter
 import app.melum.ui.main.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import org.hamcrest.CoreMatchers.instanceOf
@@ -17,12 +18,8 @@ import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import org.junit.Test
 
-
-//Note: Animations should be disabled on test device for Espresso to work correctly
-
-//@RunWith(AndroidJUnit4::class)
-@SmallTest
-class HomeFragmentTest {
+@LargeTest
+class MainActivityTests {
 
     @get:Rule
     var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
@@ -40,8 +37,6 @@ class HomeFragmentTest {
 
     @Test
     fun homeScreen_shouldOpenDetails() {
-        val resources: Resources =
-            InstrumentationRegistry.getInstrumentation().targetContext.resources
 
         try {
             onData(withId(R.id.ivAlbumCover))
@@ -57,8 +52,6 @@ class HomeFragmentTest {
 
     @Test
     fun exploreScreen_shouldContainSearchField() {
-        val resources: Resources =
-            InstrumentationRegistry.getInstrumentation().targetContext.resources
 
         onView(withId(R.id.btnExplore)).perform(click())
 
@@ -70,7 +63,7 @@ class HomeFragmentTest {
             .check(matches(not(isDisplayed())))
 
         onView(instanceOf(TextInputEditText::class.java))
-            .perform(typeText("Ed Sheeran"))
+            .perform(typeText(artistName))
 
         onView(withId(R.id.btnSearch))
             .check(matches(isDisplayed()))
@@ -78,31 +71,70 @@ class HomeFragmentTest {
 
 
     @Test
-    fun artistScreenTest() {
+    fun artistScreen_shouldContainTopAlbums() {
 
-        val name = "Ed Sheeran"
-        val networkDelay = 3000L
 
         onView(withId(R.id.btnExplore)).perform(click())
-        onView(instanceOf(TextInputEditText::class.java))
-            .perform(ViewActions.typeText(name))
 
-        onView(withId(R.id.btnSearch))
-            .perform(click())
+        onView(instanceOf(TextInputEditText::class.java)).perform(typeText(artistName))
 
-        onView(withId(R.id.progressView))
-            .check(matches(isDisplayed()))
+        onView(withId(R.id.btnSearch)).perform(click())
+
+        onView(withId(R.id.progressView)).check(matches(isDisplayed()))
 
         Thread.sleep(networkDelay)
 
-        onView(withNthId(R.id.tvArtistName, 1))
-            .perform(click())
+        onView(withId(R.id.rvArtists)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerBindingAdapter.BindingHolder>(
+                2,
+                click()
+            )
+        )
 
         Thread.sleep(networkDelay)
 
         onView(withId(R.id.ivArtist)).check(matches(isDisplayed()))
 
-//        onView(withNthId(R.id.ivAlbumCover, 1)).check(matches(isDisplayed()))
+    }
+
+
+    @Test
+    fun albumScreen_shouldHaveSaveOption() {
+
+        onView(withId(R.id.btnExplore)).perform(click())
+
+        onView(instanceOf(TextInputEditText::class.java)).perform(typeText(artistName))
+
+        onView(withId(R.id.btnSearch)).perform(click())
+
+        Thread.sleep(networkDelay)
+
+        onView(withId(R.id.rvArtists)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerBindingAdapter.BindingHolder>(
+                0,
+                click()
+            )
+        )
+
+        Thread.sleep(networkDelay)
+
+        onView(withId(R.id.rvAlbums)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerBindingAdapter.BindingHolder>(
+                1,
+                click()
+            )
+        )
+
+        onView(withId(R.id.ivAlbumCover)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.btnSave)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.btnSave)).perform(click())
+    }
+
+    companion object {
+        const val artistName = "Ed Sheeran"
+        const val networkDelay = 3000L
     }
 }
 
