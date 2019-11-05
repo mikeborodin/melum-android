@@ -59,6 +59,27 @@ class RepositoryTest {
     }
 
 
+    @Test
+    fun repository_shouldFilterOutErroneousData() {
+
+        val artist = "Metallica"
+        runBlocking {
+            val db: AlbumsDatabase = mockk()
+            val network: LastFmApi = mockk()
+            every {
+                runBlocking {
+                    network.getArtistTopAlbums(artist)
+                }
+            } returns generateFakeErrorDataForArtist()
+
+            val repo: Repository = RepositoryImpl(network, db)
+            val list: List<Album> = repo.getArtistTopAlbums(artist)
+
+            assert(list.isEmpty()) { "Repository result filter out error data" }
+        }
+    }
+
+
     private fun generateFakeSavedDataAlbums(): List<Album> {
         return listOf(
             Album("id", "Album Test", "image", mutableListOf(Song("song", "stream")))
@@ -81,6 +102,21 @@ class RepositoryTest {
             ),
             OpensearchQuery("test", "test", "test", "1"),
             "12", "123", "123"
+        )
+    )
+
+    private fun generateFakeErrorDataForArtist() = TopAbumsResponse(
+        Topalbums(
+            TopalbumsAttr((""), "", "", "", ""), listOf(
+                AlbumNetwork(
+                    Artist("id", "name", "url"),
+                    listOf(),
+                    "(null)",
+                    "(null)",
+                    123,
+                    "url"
+                )
+            )
         )
     )
 }
