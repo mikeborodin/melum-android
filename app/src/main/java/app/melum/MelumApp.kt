@@ -3,6 +3,7 @@ package app.melum
 import android.app.Activity
 import android.app.Application
 import android.os.Handler
+import app.melum.common.CustomActivityLifecycleCallback
 import app.melum.data.connectivity.ConnectedManager
 import app.melum.di.appModule
 import io.realm.Realm

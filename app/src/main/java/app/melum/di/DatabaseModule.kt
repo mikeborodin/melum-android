@@ -8,7 +8,7 @@ val databaseModule = module {
     single {
         RealmConfiguration.Builder()
             .deleteRealmIfMigrationNeeded()
-            .name("hyperJar.realm")
+            .name("melum.realm")
             .build()
     }
 

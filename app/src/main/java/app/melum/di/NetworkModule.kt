@@ -25,15 +25,15 @@ import java.util.concurrent.TimeUnit
 
 const val CONNECTION_TIMEOUT = 30000L
 
-
 const val LASTFM_API = "LASTFM_API"
 const val GOOGLE_API = "GOOGLE_API"
 const val MB_API = "MB_API"
 
-const val HTTP_AUTH = "HTTP_API"
+const val HTTP_AUTH = "HTTP_AUTH"
 const val HTTP_UNAUTH = "HTTP_UNAUTH"
 
-
+const val WIKIMEDIA = "https://commons.wikimedia.org/"
+const val MUSIC_BRAINZ = "http://musicbrainz.org/"
 
 val networkModule = module {
 
@@ -77,14 +77,14 @@ val networkModule = module {
             .build()
     }
     factory<Retrofit>(named(GOOGLE_API)) {
-        Retrofit.Builder().baseUrl("https://commons.wikimedia.org/")
+        Retrofit.Builder().baseUrl(WIKIMEDIA)
             .addConverterFactory(get())
             .client(get(named(HTTP_UNAUTH)))
             .build()
     }
 
     factory<Retrofit>(named(MB_API)) {
-        Retrofit.Builder().baseUrl("http://musicbrainz.org/")
+        Retrofit.Builder().baseUrl(MUSIC_BRAINZ)
             .addConverterFactory(get())
             .client(get(named(HTTP_UNAUTH)))
             .build()
@@ -95,7 +95,7 @@ val networkModule = module {
     factory<MusicbrainzApi> { get<Retrofit>(named(MB_API)).create(MusicbrainzApi::class.java) }
 
     factory<Repository> { RepositoryImpl(get(), get()) }
-    factory<ImageSearch> { ImageSearch(get(), get()) }
+    factory { ImageSearch(get(), get()) }
 
     single<ConnectedManager> { AndroidConnectedManager(androidContext()) }
 

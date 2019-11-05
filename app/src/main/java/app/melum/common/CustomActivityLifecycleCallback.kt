@@ -1,4 +1,4 @@
-package app.melum
+package app.melum.common
 
 import android.app.Activity
 import android.app.Application
