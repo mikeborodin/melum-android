@@ -4,7 +4,6 @@ import app.melum.abstractions.Repository
 import app.melum.data.database.AlbumsDatabase
 import app.melum.data.network.LastFmApi
 import app.melum.entities.Album
-import app.melum.entities.AlbumDetails
 import app.melum.entities.Artist
 
 
@@ -19,15 +18,15 @@ open class RepositoryImpl(private val network: LastFmApi, private val db: Albums
     override suspend fun getArtistTopAlbums(name: String): List<Album> {
         val response = network.getArtistTopAlbums(name)
         return response.topalbums.album
-            /*sometimes lastFM returns corrupted albums, so we filter them out*/
+            //sometimes lastFM returns corrupted albums, so we filter them out
             .filter { it.name != "(null)" }
             .map { it.toAlbum() }
 
     }
 
-    override suspend fun getAlbumInfo(id: String): AlbumDetails {
+    override suspend fun getAlbumInfo(id: String): Album {
         val response = network.getAlbumInfo(id)
-        return response?.album?.toAlbumDetails() ?: throw Exception("Problem while loading album")
+        return response?.album?.toAlbum() ?: throw Exception("Problem while loading album")
     }
 
     override suspend fun getSavedAlbums(): List<Album> {

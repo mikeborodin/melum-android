@@ -1,6 +1,6 @@
 package app.melum.data.network.pojo
 
-import app.melum.entities.AlbumDetails
+import app.melum.entities.Album
 import app.melum.entities.Song
 import com.google.gson.annotations.SerializedName
 
@@ -20,13 +20,14 @@ data class AlbumDetailsNetwork(
     val wiki: Wiki?
 ) {
 
-    fun toAlbumDetails(): AlbumDetails {
-        return AlbumDetails(
+    fun toAlbum(): Album {
+        return Album(
             mbid,
             name,
-            wiki?.content ?: "",
             image.associate { it.size to it.text }.getOrElse("medium", { "" }),
-            tracks.track.map { it.toSong() })
+            tracks.track.map { it.toSong() }.toMutableList(),
+            null, wiki?.content ?: ""
+        )
     }
 }
 

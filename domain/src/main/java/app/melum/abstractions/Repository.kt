@@ -1,7 +1,6 @@
 package app.melum.abstractions
 
 import app.melum.entities.Album
-import app.melum.entities.AlbumDetails
 import app.melum.entities.Artist
 
 interface Repository {
@@ -12,7 +11,7 @@ interface Repository {
 
     suspend fun getSavedAlbums(): List<Album>
 
-    suspend fun getAlbumInfo(id: String): AlbumDetails
+    suspend fun getAlbumInfo(id: String): Album
 
     suspend fun saveAlbum(album: Album)
 
