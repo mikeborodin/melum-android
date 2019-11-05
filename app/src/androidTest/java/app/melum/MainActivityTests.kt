@@ -18,6 +18,8 @@ import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import org.junit.Test
 
+
+//animations should be turned off on test device
 @LargeTest
 class MainActivityTests {
 

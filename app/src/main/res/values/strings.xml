@@ -6,16 +6,19 @@
     <string name="home_title">Favourite Albums</string>
     <string name="home_empty_icon">🎧</string>
     <string name="home_empty_message">Your library is empty, start by searching!</string>
+
     <string name="explore_empty_message">Results are empty</string>
     <string name="explore_search">Search</string>
-    <string name="explore_type_here">Type here...</string>
+    <string name="explore_type_here">Type here…</string>
+
     <string name="artist_details_title">Artist Details</string>
     <string name="artist_details_top_albums">Top albums:</string>
+    <string name="artist_details_details_btn">See Details</string>
+
     <string name="album_details_error_message">Something went wrong  while loading album! Possibly API fault.</string>
-    <string name="album_details_empty_message">This album has no tracks on the server...</string>
+    <string name="album_details_empty_message">This album has no tracks on the server…</string>
     <string name="album_details_empty_icon">📭</string>
     <string name="album_details_save_btn">Save to Favorites</string>
     <string name="album_details_remove_btn">Remove from favorites</string>
     <string name="album_details_error_icon">🔇</string>
-    <string name="artist_details_details_btn">See Details</string>
 </resources>
